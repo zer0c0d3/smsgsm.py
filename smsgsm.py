@@ -1,5 +1,5 @@
-﻿#!/usr/bin/python
-#	-*-	coding:	utf-8	-*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import subprocess,os,sys
 def sendsms(message,number):
 	fmodem=subprocess.check_output("sudo mmcli -L", shell=True)
