@@ -2,6 +2,7 @@
 Send SMS From Terminal Via GSM Modem
 
 requirements
+
 sudo apt install modemmanager
 
 ----------------------------------------------
