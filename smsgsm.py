@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+#sudo apt install modemmanager
 import subprocess,os,sys
 def sendsms(message,number):
-	fmodem=subprocess.check_output("sudo mmcli -L", shell=True)
+	fmodem=str(subprocess.check_output("sudo mmcli -L", shell=True))
 	fcut1="/org/freedesktop/ModemManager1/Modem/"
 	pos1=fmodem.find(fcut1)
 	pos1+=len(fcut1)
@@ -11,7 +12,7 @@ def sendsms(message,number):
 		nmodem+=fmodem[pos1]
 		pos1+=1
 	os.system("sudo mmcli -m "+nmodem+" -e")
-	fmsg=subprocess.check_output("sudo mmcli -m "+nmodem+" --messaging-create-sms=\"text='"+message+"',number='"+number+"'\"", shell=True)
+	fmsg=str(subprocess.check_output("sudo mmcli -m "+nmodem+" --messaging-create-sms=\"text='"+message+"',number='"+number+"'\"", shell=True))
 	fcut2="/org/freedesktop/ModemManager1/SMS/"
 	pos2=fmsg.find(fcut2)
 	pos2+=len(fcut2)
@@ -27,18 +28,18 @@ if sudo == 0:
 	message=""
 	for arg in range(0,len(sys.argv)):
 		if "-" in sys.argv[arg] and sys.argv[arg] not in r_args:
-			print "run 'sudo python smsgsm.py -help' in terminal ..."
+			print ("run 'sudo python smsgsm.py -help' in terminal ...")
 			break
 		if sys.argv[arg-1]=="-m":
 			message=sys.argv[arg]
 		if sys.argv[arg-1]=="-n":
 			number=sys.argv[arg]
 		if sys.argv[arg]=="-help":
-			print "sudo python smsgsm.py -m 'message text example' -n '6936000000'"
+			print ("sudo python smsgsm.py -m 'message text example' -n '6936000000'")
 	if len(sys.argv)==1:
-		print "run 'sudo python smsgsm.py -help' in terminal ..."
+		print ("run 'sudo python smsgsm.py -help' in terminal ...")
 	if message!="" and number!="":
 		sendsms(message,number)
 else:
-	print "Run this script as root !!!"
-	print "sudo python smsgsm.py -m 'message text example' -n '6936000000'"
+	print ("Run this script as root !!!")
+	print ("sudo python smsgsm.py -m 'message text example' -n '6936000000'")
